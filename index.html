@@ -1,56 +1,82 @@
-```html
+```html id="engwedding1"
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>دعوة زفاف عمرو & هبه</title>
+<title>Wedding Invitation - Amr & Heba</title>
 
 <style>
 body{
     margin:0;
-    font-family:Tahoma, sans-serif;
-    background:linear-gradient(to bottom,#fdfaf6,#efe7dd);
-    color:#5a4b41;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#f7f3ee,#e7d9c7);
+    color:#4a3b2f;
     text-align:center;
 }
 
 .container{
-    padding:50px 20px;
-}
-
-h1{
-    font-size:55px;
-    margin-bottom:10px;
-}
-
-h2{
-    font-size:30px;
-    font-weight:normal;
+    padding:30px 15px;
 }
 
 .card{
     background:white;
-    max-width:700px;
+    max-width:750px;
     margin:auto;
-    padding:40px;
+    padding:30px;
     border-radius:20px;
-    box-shadow:0 0 20px rgba(0,0,0,0.1);
+    box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
-p{
-    font-size:22px;
+h1{
+    font-size:50px;
+    margin:10px 0;
+    color:#b08a5a;
+}
+
+h2{
+    font-size:26px;
+    font-weight:normal;
+}
+
+.section{
+    margin:20px 0;
+    font-size:20px;
     line-height:1.8;
 }
 
-.date{
-    color:#b38b59;
+.countdown{
+    font-size:22px;
     font-weight:bold;
+    color:#8b6b3f;
+    margin-top:10px;
 }
 
-.footer{
-    margin-top:40px;
-    font-size:20px;
+.btn{
+    display:inline-block;
+    padding:12px 20px;
+    margin:10px;
+    border-radius:10px;
+    text-decoration:none;
+    color:white;
+    background:#b08a5a;
+}
+
+.btn:hover{
+    background:#8c6b3f;
+}
+
+input{
+    padding:10px;
+    margin:5px;
+    width:80%;
+    max-width:300px;
+    border-radius:8px;
+    border:1px solid #ccc;
+}
+
+.rsvp{
+    margin-top:20px;
 }
 </style>
 </head>
@@ -60,32 +86,85 @@ p{
 <div class="container">
 <div class="card">
 
-<h2>بسم الله الرحمن الرحيم</h2>
+<h2>In the name of God, Most Gracious, Most Merciful</h2>
 
-<h1>عمرو ♥ هبه</h1>
+<h1>Amr ♥ Heba</h1>
 
-<p>
-يسعدنا دعوتكم لمشاركتنا فرحتنا وحضور حفل زفافنا
-</p>
+<div class="section">
+We are delighted to invite you to celebrate our wedding
+</div>
 
-<p class="date">
-📅 1 / 1 / 2027
-</p>
+<div class="section">
+📅 01 / 01 / 2027  
+<br>
+🕘 9:00 PM  
+<br>
+📍 Armed Forces Hall - Benha
+</div>
 
-<p>
-🕘 الساعة 9:00 مساءً
-</p>
+<!-- Countdown -->
+<div class="section">
+⏳ Time remaining until the wedding:
+<div class="countdown" id="countdown"></div>
+</div>
 
-<p>
-📍 قاعة القوات المسلحة - بنها
-</p>
+<!-- Map -->
+<div class="section">
+<a class="btn" target="_blank"
+href="https://www.google.com/maps/search/?api=1&query=Armed%20Forces%20Hall%20Benha">
+📍 Open Location
+</a>
+</div>
 
-<div class="footer">
-نتشرف بحضوركم ومشاركتكم أجمل لحظات حياتنا 🌹
+<!-- RSVP -->
+<div class="section rsvp">
+<h3>RSVP</h3>
+<input id="name" placeholder="Your Name">
+<br>
+<button class="btn" onclick="rsvp()">Confirm Attendance</button>
+<p id="msg"></p>
+</div>
+
+<div class="section">
+We would be honored by your presence 💛
 </div>
 
 </div>
 </div>
+
+<script>
+// Countdown
+var weddingDate = new Date("Jan 1, 2027 21:00:00").getTime();
+
+var x = setInterval(function(){
+    var now = new Date().getTime();
+    var distance = weddingDate - now;
+
+    var days = Math.floor(distance / (1000*60*60*24));
+    var hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+    var minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+    var seconds = Math.floor((distance % (1000*60)) / 1000);
+
+    document.getElementById("countdown").innerHTML =
+    days + " days - " + hours + " hours - " + minutes + " minutes - " + seconds + " seconds";
+
+    if(distance < 0){
+        document.getElementById("countdown").innerHTML = "It's Wedding Day 🎉";
+    }
+},1000);
+
+// RSVP
+function rsvp(){
+    var name = document.getElementById("name").value;
+    if(name){
+        document.getElementById("msg").innerHTML =
+        "Thank you " + name + " 💛 Your attendance is confirmed";
+    } else {
+        document.getElementById("msg").innerHTML =
+        "Please enter your name";
+    }
+}
+</script>
 
 </body>
 </html>
