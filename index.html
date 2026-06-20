@@ -26,7 +26,7 @@ body{
     z-index:-3;
 }
 
-/* 🌸 ENTRY SCREEN */
+/* 🌸 ENTRY */
 #entry{
     position:fixed;
     width:100%;
@@ -38,7 +38,6 @@ body{
     align-items:center;
     flex-direction:column;
     z-index:10;
-    transition:1s;
 }
 
 #entry input{
@@ -82,7 +81,7 @@ h1{
     color:#f5d7a1;
 }
 
-/* 🎥 VIDEO VIP */
+/* VIDEO */
 .profile-video{
     width:260px;
     height:260px;
@@ -151,7 +150,6 @@ h1{
 
 <p>We are delighted to invite you to our wedding celebration</p>
 
-<!-- 📍 LOCATION UPDATED -->
 <p>📅 1 / 1 / 2027 | 🕘 9:00 PM</p>
 <p>📍 Jewel Plaza, Benha</p>
 
@@ -189,6 +187,9 @@ function enter(){
     document.getElementById("main").style.display="block";
 
     document.getElementById("welcomeText").innerText="Welcome " + name + " 💛";
+
+    // 🔥 مهم: يرجّع الصفحة فوق
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
     // 🎥 تشغيل الفيديو + الصوت
     let video=document.getElementById("myVideo");
