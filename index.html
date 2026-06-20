@@ -15,25 +15,57 @@ body{
     overflow-x:hidden;
 }
 
-/* BACKGROUND */
+/* BACKGROUND BLUR IMAGE */
 .bg{
     position:fixed;
     width:100%;
     height:100%;
     background:url('123.jpg') center/cover no-repeat;
-    filter:blur(8px) brightness(0.35);
+    filter:blur(10px) brightness(0.35);
     transform:scale(1.1);
     z-index:-2;
 }
 
-/* CARD */
+/* ENTRY SCREEN */
+#entry{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.95);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:10;
+}
+
+#entry input{
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    width:250px;
+    text-align:center;
+}
+
+#entry button{
+    margin-top:10px;
+    padding:10px 18px;
+    border:none;
+    border-radius:10px;
+    background:#b08a5a;
+    color:white;
+    cursor:pointer;
+}
+
+/* MAIN CARD */
 .card{
     max-width:850px;
-    margin:60px auto;
+    margin:50px auto;
     background:rgba(0,0,0,0.6);
-    padding:30px;
+    padding:25px;
     border-radius:20px;
     text-align:center;
+    display:none;
     animation:fadeIn 1.2s ease;
 }
 
@@ -48,10 +80,10 @@ h1{
     color:#f5d7a1;
 }
 
-/* VIDEO CIRCLE (PROFILE) */
+/* VIDEO PROFILE */
 .profile-video{
-    width:150px;
-    height:150px;
+    width:160px;
+    height:160px;
     border-radius:50%;
     object-fit:cover;
     border:3px solid #f5d7a1;
@@ -89,15 +121,24 @@ h1{
 
 <body>
 
+<!-- BACKGROUND -->
 <div class="bg"></div>
 
-<div class="card">
+<!-- ENTRY -->
+<div id="entry">
+    <h2 style="color:#f5d7a1;">Wedding Invitation 💍</h2>
+    <input id="guestName" placeholder="Enter Your Name">
+    <button onclick="enter()">Enter</button>
+</div>
 
-<h2>Wedding Invitation</h2>
+<!-- MAIN -->
+<div class="card" id="main">
+
+<h2 id="welcomeText">Wedding Invitation</h2>
 <h1>Amr ♥ Heba</h1>
 
-<!-- VIDEO بدل الصورة -->
-<video class="profile-video" autoplay muted loop playsinline>
+<!-- 🎥 VIDEO بدل الصورة -->
+<video id="myVideo" class="profile-video" loop playsinline>
     <source src="wedding.mp4" type="video/mp4">
 </video>
 
@@ -129,6 +170,35 @@ Open Map 📍
 </div>
 
 <script>
+
+/* ENTER FUNCTION */
+function enter(){
+    let name = document.getElementById("guestName").value;
+
+    if(!name){
+        alert("Please enter your name");
+        return;
+    }
+
+    document.getElementById("entry").style.display="none";
+    document.getElementById("main").style.display="block";
+
+    document.getElementById("welcomeText").innerText = "Welcome " + name + " 💛";
+
+    // 🎥 تشغيل الفيديو + الصوت بعد الدخول
+    let video = document.getElementById("myVideo");
+
+    video.muted = false;
+    video.volume = 1.0;
+
+    let playPromise = video.play();
+
+    if (playPromise !== undefined) {
+        playPromise.catch(err => {
+            console.log("Autoplay blocked:", err);
+        });
+    }
+}
 
 /* COUNTDOWN */
 let wedding = new Date("Jan 1, 2027 21:00:00").getTime();
