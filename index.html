@@ -36,7 +36,7 @@ body{
 
 @keyframes fadeOutIntro{
     0%{opacity:1;}
-    75%{opacity:1;}
+    80%{opacity:1;}
     100%{opacity:0; visibility:hidden;}
 }
 
@@ -101,29 +101,30 @@ body{
     to{opacity:1; transform:translateY(0);}
 }
 
-/* 💛 WELCOME */
+/* 💛 WELCOME NAME (VIP FADE + GLOW) */
 #guestNameText{
     font-weight:900;
     font-size:38px;
     color:#f5d7a1;
-    text-shadow:0 0 12px rgba(245,215,161,0.4);
     opacity:0;
     transform:translateY(20px);
-    transition:1s ease;
+    transition:1.2s ease;
+    text-shadow:0 0 0 rgba(245,215,161,0);
 }
 
 #guestNameText.show{
     opacity:1;
     transform:translateY(0);
+    text-shadow:0 0 18px rgba(245,215,161,0.5);
 }
 
-/* 💍 COUPLE NAME (رجعناه زي ما هو) */
-#coupleName{
+/* 💍 COUPLE NAME */
+h1{
     font-size:55px;
     color:#f5d7a1;
 }
 
-/* VIDEO */
+/* 🎥 VIDEO (UNCHANGED) */
 .profile-video{
     width:280px;
     height:280px;
@@ -182,13 +183,11 @@ body{
 <!-- 💍 MAIN -->
 <div class="card" id="main">
 
-<!-- 💛 WELCOME -->
 <h2 id="guestNameText"></h2>
 
-<!-- 💍 اسم العريس والعروسة (موجود زي ما هو) -->
-<h1 id="coupleName">Amr ♥ Heba</h1>
+<h1>Amr ♥ Heba</h1>
 
-<!-- 🎥 VIDEO -->
+<!-- 🎥 VIDEO (NO CHANGE AT ALL) -->
 <video id="myVideo" class="profile-video" loop playsinline>
     <source src="wedding.mp4" type="video/mp4">
 </video>
@@ -237,10 +236,13 @@ function enter(){
     let el=document.getElementById("guestNameText");
     el.innerText="Welcome " + name + " 💛";
 
-    setTimeout(()=>{ el.classList.add("show"); },200);
+    setTimeout(()=>{
+        el.classList.add("show");
+    },200);
 
     window.scrollTo({ top: 0 });
 
+    // 🎥 VIDEO (UNCHANGED)
     let video=document.getElementById("myVideo");
     video.play().catch(()=>{});
 }
