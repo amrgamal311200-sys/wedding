@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Amr & Heba Wedding Invitation</title>
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cairo:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 body{
@@ -35,12 +34,13 @@ body{
     pointer-events:none;
     z-index:-1;
 }
+
 .particles span{
     position:absolute;
     top:-10%;
     font-size:18px;
-    color:#f5d7a1;
     animation:fall 10s linear infinite;
+    color:#f5d7a1;
 }
 
 @keyframes fall{
@@ -80,7 +80,7 @@ body{
     cursor:pointer;
 }
 
-/* 💍 MAIN CARD */
+/* 💍 MAIN */
 .card{
     max-width:900px;
     margin:50px auto;
@@ -98,18 +98,20 @@ body{
     to{opacity:1; transform:translateY(0);}
 }
 
-/* 💍 NAME ANIMATION */
-#guestNameText{
-    font-family: 'Great Vibes', cursive;
-    font-size: 45px;
+/* ✨ VIP NAMES */
+#weddingNames{
+    font-family: 'Playfair Display', serif;
+    font-weight:900;
+    font-size:42px;
     color:#f5d7a1;
-    text-shadow:0 0 12px rgba(245,215,161,0.6);
+    letter-spacing:2px;
+    text-shadow:0 0 15px rgba(245,215,161,0.4);
     opacity:0;
     transform:translateY(20px);
     transition:1s ease;
 }
 
-#guestNameText.show{
+#weddingNames.show{
     opacity:1;
     transform:translateY(0);
 }
@@ -155,6 +157,7 @@ h1{
     background:#b08a5a;
     color:white;
     text-decoration:none;
+    border:none;
 }
 </style>
 </head>
@@ -175,25 +178,26 @@ h1{
 
 <!-- 💍 ENTRY -->
 <div id="entry">
-    <h2 style="color:#f5d7a1;">Wedding Invitation 💍</h2>
-    <input id="guestName" placeholder="Enter Your Name">
+    <h2 style="color:#f5d7a1;">Enter Your Name 💍</h2>
+    <input id="guestName" placeholder="Your Name">
     <button onclick="enter()">Enter</button>
 </div>
 
 <!-- 💍 MAIN -->
 <div class="card" id="main">
 
-<h2 id="guestNameText"></h2>
+<!-- 💍 NAMES VIP -->
+<div id="weddingNames">Amr ♥ Heba</div>
 
-<h1>Amr ♥ Heba</h1>
+<h1>Wedding Invitation</h1>
 
-<!-- 🎥 VIDEO (NO CHANGE) -->
+<!-- 🎥 VIDEO (UNCHANGED) -->
 <video id="myVideo" class="profile-video" loop playsinline>
     <source src="wedding.mp4" type="video/mp4">
 </video>
 
-<p style="font-size:18px; line-height:1.8; color:#f5d7a1;">
-﴿ مِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ ﴾
+<p>
+﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا ﴾
 </p>
 
 <p>We are delighted to invite you to our wedding celebration</p>
@@ -222,7 +226,7 @@ Open Map 📍
 
 <script>
 
-/* ENTER */
+/* ENTER FUNCTION */
 function enter(){
     let name=document.getElementById("guestName").value;
 
@@ -234,8 +238,8 @@ function enter(){
     document.getElementById("entry").style.display="none";
     document.getElementById("main").style.display="block";
 
-    let el=document.getElementById("guestNameText");
-    el.innerText="Welcome " + name + " 💛";
+    let el=document.getElementById("weddingNames");
+    el.innerText="Amr ♥ Heba";
 
     setTimeout(()=>{
         el.classList.add("show");
@@ -243,7 +247,7 @@ function enter(){
 
     window.scrollTo({ top: 0 });
 
-    // 🎥 video unchanged
+    // 🎥 VIDEO (NO CHANGE)
     let video=document.getElementById("myVideo");
     video.play().catch(()=>{});
 }
