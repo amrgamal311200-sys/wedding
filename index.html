@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Amr & Heba Wedding Invitation</title>
 
-<!-- Arabic + Elegant Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
@@ -16,62 +15,28 @@ body{
     overflow-x:hidden;
 }
 
-/* BACKGROUND */
+/* BACKGROUND IMAGE (BLUR) */
 .bg{
     position:fixed;
     width:100%;
     height:100%;
     background:url('123.jpg') center/cover no-repeat;
-    filter:blur(7px) brightness(0.35);
+    filter:blur(10px) brightness(0.35);
     transform:scale(1.1);
     z-index:-2;
 }
 
-/* ENTRY SCREEN */
-#entry{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:linear-gradient(135deg, rgba(0,0,0,0.92), rgba(40,30,20,0.95));
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    z-index:10;
-}
-
-#entry input{
-    padding:12px;
-    border-radius:10px;
-    border:none;
-    width:260px;
-    text-align:center;
-    margin-top:10px;
-}
-
-#entry button{
-    margin-top:10px;
-    padding:10px 18px;
-    border:none;
-    border-radius:10px;
-    background:#b08a5a;
-    color:white;
-    cursor:pointer;
-}
-
-/* MAIN */
+/* MAIN CARD */
 .card{
     max-width:850px;
-    margin:60px auto;
+    margin:50px auto;
     background:rgba(0,0,0,0.6);
-    padding:30px;
+    padding:25px;
     border-radius:20px;
     text-align:center;
-    display:none;
-    animation:fadeIn 1.5s ease-in-out;
+    animation:fadeIn 1.2s ease;
 }
 
-/* FADE ANIMATION */
 @keyframes fadeIn{
     from{opacity:0; transform:translateY(20px);}
     to{opacity:1; transform:translateY(0);}
@@ -83,37 +48,26 @@ h1{
     color:#f5d7a1;
 }
 
-/* PROFILE */
+/* PROFILE IMAGE */
 .profile{
-    width:150px;
-    height:150px;
+    width:140px;
+    height:140px;
     border-radius:50%;
     object-fit:cover;
     border:3px solid #f5d7a1;
 }
 
-/* QURAN TEXT */
-.quran{
-    font-family:'Cairo', serif;
-    font-size:20px;
-    line-height:2;
-    color:#f5d7a1;
-    margin:20px 0;
-    opacity:0;
-    animation:fadeInQuran 2.5s ease forwards;
-    animation-delay:1s;
+/* VIDEO */
+.video-box{
+    margin:25px auto;
+    max-width:500px;
 }
 
-.quran small{
-    display:block;
-    margin-top:10px;
-    color:#ddd;
-    font-size:14px;
-}
-
-@keyframes fadeInQuran{
-    from{opacity:0; transform:translateY(20px);}
-    to{opacity:1; transform:translateY(0);}
+.video-box video{
+    width:100%;
+    border-radius:15px;
+    border:3px solid #b08a5a;
+    box-shadow:0 10px 25px rgba(0,0,0,0.5);
 }
 
 /* COUNTDOWN */
@@ -139,46 +93,40 @@ h1{
     border-radius:10px;
     background:#b08a5a;
     color:white;
-    border:none;
-    cursor:pointer;
     text-decoration:none;
+    border:none;
 }
 </style>
 </head>
 
 <body>
 
+<!-- BACKGROUND -->
 <div class="bg"></div>
 
-<!-- ENTRY -->
-<div id="entry">
-    <h2 style="color:#f5d7a1;">✨ Wedding Invitation ✨</h2>
-    <input id="guestName" placeholder="Enter Your Name">
-    <button onclick="enter()">Enter</button>
-</div>
+<div class="card">
 
-<!-- MUSIC -->
-<audio id="music" loop>
-  <source src="song.mp3" type="audio/mpeg">
-</audio>
-
-<!-- MAIN -->
-<div class="card" id="main">
-
-<h2 id="welcomeText">Wedding Invitation</h2>
+<h2>Wedding Invitation</h2>
 <h1>Amr ♥ Heba</h1>
 
 <img src="123.jpg" class="profile">
 
-<!-- QURAN VERSE -->
-<div class="quran">
+<p>
 ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾
-<small>(الروم: 21)</small>
-</div>
+</p>
 
 <p>We are delighted to invite you to our wedding celebration</p>
 
 <p>📅 1 / 1 / 2027 | 🕘 9:00 PM | 📍 Benha</p>
+
+<hr>
+
+<!-- VIDEO -->
+<div class="video-box">
+  <video autoplay muted loop playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+</div>
 
 <hr>
 
@@ -197,66 +145,22 @@ href="https://www.google.com/maps/search/?api=1&query=Armed%20Forces%20Hall%20Be
 Open Map 📍
 </a>
 
-<hr>
-
-<h3>RSVP</h3>
-
-<input id="name" placeholder="Your Name"><br>
-<select id="attend">
-<option>Will Attend</option>
-<option>Cannot Attend</option>
-</select><br>
-
-<button class="btn" onclick="rsvp()">Submit</button>
-<p id="msg"></p>
-
 </div>
 
 <script>
 
-/* ENTRY + MUSIC */
-function enter(){
-    let name=document.getElementById("guestName").value;
-
-    if(!name){
-        alert("Please enter your name");
-        return;
-    }
-
-    document.getElementById("entry").style.display="none";
-    document.getElementById("main").style.display="block";
-
-    document.getElementById("welcomeText").innerText = "Welcome " + name + " 💛";
-
-    // تشغيل الموسيقى بعد التفاعل
-    let audio=document.getElementById("music");
-    audio.volume=0.3;
-    audio.play().catch(()=>{});
-}
-
 /* COUNTDOWN */
-let wedding=new Date("Jan 1, 2027 21:00:00").getTime();
+let wedding = new Date("Jan 1, 2027 21:00:00").getTime();
 
 setInterval(()=>{
-    let now=new Date().getTime();
-    let diff=wedding-now;
+    let now = new Date().getTime();
+    let diff = wedding - now;
 
     document.getElementById("d").innerText=Math.floor(diff/(1000*60*60*24));
     document.getElementById("h").innerText=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
     document.getElementById("m").innerText=Math.floor((diff%(1000*60*60))/(1000*60));
     document.getElementById("s").innerText=Math.floor((diff%(1000*60))/1000);
 },1000);
-
-/* RSVP */
-function rsvp(){
-    let name=document.getElementById("name").value;
-    let attend=document.getElementById("attend").value;
-
-    if(name){
-        document.getElementById("msg").innerHTML =
-        "Thank you " + name + " 💛 (" + attend + ")";
-    }
-}
 
 </script>
 
