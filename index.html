@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Amr & Heba Wedding Invitation</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700;900&display=swap" rel="stylesheet">
 
 <style>
 body{
     margin:0;
-    font-family:'Playfair Display','Cairo', serif;
+    font-family:'Playfair Display', serif;
     color:white;
     overflow-x:hidden;
 }
@@ -27,17 +27,12 @@ body{
     z-index:999;
     animation:fadeOutIntro 3s ease forwards;
 }
-
-#intro h1{
-    color:#f5d7a1;
-    font-size:32px;
-    letter-spacing:2px;
-}
+#intro h1{color:#f5d7a1;font-size:32px;}
 
 @keyframes fadeOutIntro{
     0%{opacity:1;}
     80%{opacity:1;}
-    100%{opacity:0; visibility:hidden;}
+    100%{opacity:0;visibility:hidden;}
 }
 
 /* 🌸 BACKGROUND */
@@ -57,14 +52,12 @@ body{
     width:100%;
     height:100%;
     background:rgba(0,0,0,0.6);
-    backdrop-filter:blur(8px);
     display:flex;
     justify-content:center;
     align-items:center;
     flex-direction:column;
     z-index:10;
 }
-
 #entry input{
     padding:12px;
     border-radius:10px;
@@ -72,7 +65,6 @@ body{
     width:260px;
     text-align:center;
 }
-
 #entry button{
     margin-top:10px;
     padding:10px 18px;
@@ -80,77 +72,70 @@ body{
     border-radius:10px;
     background:#b08a5a;
     color:white;
-    cursor:pointer;
 }
 
-/* 💍 MAIN */
+/* 💍 MAIN CARD (MOBILE FIX) */
 .card{
+    width:100%;
     max-width:900px;
-    margin:50px auto;
+    margin:0 auto;
     background:rgba(0,0,0,0.6);
-    padding:25px;
-    border-radius:20px;
+    padding:20px;
+    border-radius:0;
     text-align:center;
     display:none;
-    animation:fadeIn 1.5s ease;
-    box-shadow:0 0 40px rgba(245,215,161,0.15);
+    animation:fadeIn 1.2s ease;
 }
 
 @keyframes fadeIn{
-    from{opacity:0; transform:translateY(30px);}
-    to{opacity:1; transform:translateY(0);}
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
 }
 
-/* 💛 WELCOME NAME (VIP FADE + GLOW) */
+/* 💛 WELCOME */
 #guestNameText{
-    font-weight:900;
-    font-size:38px;
+    font-size:32px;
     color:#f5d7a1;
     opacity:0;
-    transform:translateY(20px);
-    transition:1.2s ease;
-    text-shadow:0 0 0 rgba(245,215,161,0);
+    transform:translateY(15px);
+    transition:1s ease;
 }
-
 #guestNameText.show{
     opacity:1;
     transform:translateY(0);
-    text-shadow:0 0 18px rgba(245,215,161,0.5);
 }
 
-/* 💍 COUPLE NAME */
+/* 💍 COUPLE */
 h1{
-    font-size:55px;
+    font-size:40px;
     color:#f5d7a1;
 }
 
-/* 🎥 VIDEO (UNCHANGED) */
+/* 🎥 VIDEO */
 .profile-video{
-    width:280px;
-    height:280px;
+    width:100%;
+    max-width:320px;
+    height:auto;
     border-radius:50%;
-    object-fit:cover;
     border:4px solid #f5d7a1;
-    box-shadow:0 20px 60px rgba(0,0,0,0.6);
-    margin-top:10px;
 }
 
-/* COUNTDOWN */
+/* ⏳ COUNTDOWN (FIXED) */
 .countdown{
     display:flex;
     justify-content:center;
     flex-wrap:wrap;
-    gap:10px;
+    gap:8px;
+    margin-top:10px;
 }
-
 .box{
     background:#b08a5a;
-    padding:12px;
-    border-radius:10px;
-    min-width:80px;
+    padding:10px;
+    border-radius:8px;
+    min-width:70px;
 }
 
-/* BUTTON */
+/* MAP BUTTON */
 .btn{
     display:inline-block;
     padding:12px 18px;
@@ -187,16 +172,13 @@ h1{
 
 <h1>Amr ♥ Heba</h1>
 
-<!-- 🎥 VIDEO (NO CHANGE AT ALL) -->
 <video id="myVideo" class="profile-video" loop playsinline>
     <source src="wedding.mp4" type="video/mp4">
 </video>
 
-<p>
-﴿ مِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ ﴾
-</p>
+<p>﴿ مِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا ﴾</p>
 
-<p>We are delighted to invite you to our wedding celebration</p>
+<p>We are delighted to invite you</p>
 
 <p>📅 1 / 1 / 2027 | 🕘 9:00 PM</p>
 <p>📍 Jewel Plaza, Benha</p>
@@ -222,30 +204,43 @@ Open Map 📍
 
 <script>
 
+/* ENTER */
 function enter(){
     let name=document.getElementById("guestName").value;
 
     if(!name){
-        alert("Please enter your name");
+        alert("Enter your name");
         return;
     }
 
     document.getElementById("entry").style.display="none";
     document.getElementById("main").style.display="block";
 
-    let el=document.getElementById("guestNameText");
-    el.innerText="Welcome " + name + " 💛";
+    document.getElementById("guestNameText").innerText="Welcome " + name + " 💛";
 
     setTimeout(()=>{
-        el.classList.add("show");
+        document.getElementById("guestNameText").classList.add("show");
     },200);
 
-    window.scrollTo({ top: 0 });
+    // ⬇️ يبدأ من فوق مباشرة
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
-    // 🎥 VIDEO (UNCHANGED)
-    let video=document.getElementById("myVideo");
-    video.play().catch(()=>{});
+    // 🎥 VIDEO unchanged
+    document.getElementById("myVideo").play().catch(()=>{});
 }
+
+/* ⏳ COUNTDOWN FIXED */
+let wedding=new Date("Jan 1, 2027 21:00:00").getTime();
+
+setInterval(()=>{
+    let now=new Date().getTime();
+    let diff=wedding-now;
+
+    document.getElementById("d").innerText=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("h").innerText=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    document.getElementById("m").innerText=Math.floor((diff%(1000*60*60))/(1000*60));
+    document.getElementById("s").innerText=Math.floor((diff%(1000*60))/1000);
+},1000);
 
 </script>
 
