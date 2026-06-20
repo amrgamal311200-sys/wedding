@@ -1,10 +1,10 @@
-```html id="profinalwedding"
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amr & Heba Wedding</title>
+<title>Amr & Heba Wedding Invitation</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
@@ -13,30 +13,31 @@ body{
     margin:0;
     font-family:'Playfair Display', serif;
     color:white;
+    text-align:center;
 }
 
-/* FULL BACKGROUND */
+/* BACKGROUND */
 .bg{
     position:fixed;
     width:100%;
     height:100%;
     background:url('123.jpg') center/cover no-repeat;
-    filter:blur(6px) brightness(0.5);
+    filter:blur(6px) brightness(0.4);
     transform:scale(1.1);
     z-index:-1;
 }
 
-/* MAIN CARD */
+/* CARD */
 .card{
     max-width:850px;
     margin:60px auto;
-    background:rgba(0,0,0,0.55);
+    background:rgba(0,0,0,0.6);
     padding:30px;
     border-radius:20px;
-    text-align:center;
-    box-shadow:0 0 30px rgba(0,0,0,0.6);
+    box-shadow:0 0 30px rgba(0,0,0,0.5);
 }
 
+/* TITLE */
 h1{
     font-size:50px;
     margin:10px 0;
@@ -47,18 +48,22 @@ h2{
     font-weight:normal;
 }
 
-.section{
-    margin:20px 0;
-    font-size:20px;
-    line-height:1.8;
+/* IMAGE */
+.profile{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    border:3px solid #f5d7a1;
+    object-fit:cover;
+    margin-top:10px;
 }
 
 /* COUNTDOWN */
 .countdown{
     display:flex;
     justify-content:center;
-    flex-wrap:wrap;
     gap:10px;
+    flex-wrap:wrap;
 }
 
 .box{
@@ -68,17 +73,7 @@ h2{
     min-width:80px;
 }
 
-/* BUTTON */
-.btn{
-    display:inline-block;
-    padding:10px 18px;
-    margin-top:10px;
-    border-radius:10px;
-    background:#b08a5a;
-    color:white;
-    text-decoration:none;
-}
-
+/* INPUT */
 input, select{
     padding:10px;
     margin:5px;
@@ -86,6 +81,32 @@ input, select{
     max-width:300px;
     border-radius:8px;
     border:none;
+}
+
+/* BUTTON */
+.btn{
+    display:inline-block;
+    padding:12px 18px;
+    margin-top:10px;
+    border-radius:10px;
+    background:#b08a5a;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+
+/* MUSIC BUTTON */
+.music-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#b08a5a;
+    color:white;
+    border:none;
+    padding:12px 16px;
+    border-radius:50px;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,0.3);
 }
 </style>
 </head>
@@ -95,19 +116,20 @@ input, select{
 <div class="bg"></div>
 
 <!-- MUSIC -->
-<audio id="music" autoplay loop>
+<audio id="music" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
+
+<button class="music-btn" onclick="playMusic()">
+🎵 Music
+</button>
 
 <div class="card">
 
 <h2>Wedding Invitation</h2>
 <h1>Amr ♥ Heba</h1>
 
-<!-- IMAGE -->
-<img src="123.jpg" 
-style="width:140px;height:140px;border-radius:50%;
-border:3px solid #f5d7a1;object-fit:cover;margin-top:10px;">
+<img src="123.jpg" class="profile">
 
 <div class="section">
 We are delighted to invite you to our wedding celebration
@@ -119,8 +141,8 @@ We are delighted to invite you to our wedding celebration
 📍 Armed Forces Hall - Benha
 </div>
 
-<!-- COUNTDOWN -->
-<div class="section">
+<hr>
+
 <h3>Countdown</h3>
 <div class="countdown">
 <div class="box"><span id="d"></span><br>Days</div>
@@ -128,17 +150,18 @@ We are delighted to invite you to our wedding celebration
 <div class="box"><span id="m"></span><br>Min</div>
 <div class="box"><span id="s"></span><br>Sec</div>
 </div>
-</div>
 
-<!-- MAP -->
+<hr>
+
 <a class="btn" target="_blank"
 href="https://www.google.com/maps/search/?api=1&query=Armed%20Forces%20Hall%20Benha">
 Open Map 📍
 </a>
 
-<!-- RSVP -->
-<div class="section">
+<hr>
+
 <h3>RSVP</h3>
+
 <input id="name" placeholder="Your Name"><br>
 <select id="attend">
 <option>Will Attend</option>
@@ -147,7 +170,6 @@ Open Map 📍
 
 <button class="btn" onclick="rsvp()">Submit</button>
 <p id="msg"></p>
-</div>
 
 </div>
 
@@ -179,8 +201,14 @@ function rsvp(){
     }
 }
 
-// MUSIC AUTOPLAY FIX
-window.addEventListener("load",()=>{
+// MUSIC FIX (100% works)
+function playMusic(){
+    let audio = document.getElementById("music");
+    audio.play();
+}
+
+// autoplay attempt
+window.addEventListener("load", ()=>{
     let audio = document.getElementById("music");
     audio.play().catch(()=>{});
 });
