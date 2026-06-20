@@ -1,10 +1,10 @@
-```html id="prowedding"
+```html id="profinalwedding"
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amr & Heba Wedding Invitation</title>
+<title>Amr & Heba Wedding</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
@@ -12,174 +12,178 @@
 body{
     margin:0;
     font-family:'Playfair Display', serif;
-    background:linear-gradient(135deg,#f7f3ee,#e7d9c7);
-    text-align:center;
-    color:#4a3b2f;
-}
-
-/* Top hero */
-.hero{
-    padding:60px 20px;
-    background:url('https://images.unsplash.com/photo-1529634891791-7a5b5a7a7a7a') center/cover;
     color:white;
 }
 
-.overlay{
-    background:rgba(0,0,0,0.5);
-    padding:60px 20px;
+/* FULL BACKGROUND */
+.bg{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:url('123.jpg') center/cover no-repeat;
+    filter:blur(6px) brightness(0.5);
+    transform:scale(1.1);
+    z-index:-1;
+}
+
+/* MAIN CARD */
+.card{
+    max-width:850px;
+    margin:60px auto;
+    background:rgba(0,0,0,0.55);
+    padding:30px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 0 30px rgba(0,0,0,0.6);
 }
 
 h1{
-    font-size:55px;
+    font-size:50px;
     margin:10px 0;
-    color:#fff;
+    color:#f5d7a1;
 }
 
 h2{
     font-weight:normal;
 }
 
-/* Card */
-.card{
-    background:white;
-    max-width:850px;
-    margin:-50px auto 30px;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 10px 40px rgba(0,0,0,0.2);
+.section{
+    margin:20px 0;
+    font-size:20px;
+    line-height:1.8;
 }
 
-/* Countdown */
+/* COUNTDOWN */
 .countdown{
     display:flex;
     justify-content:center;
-    gap:10px;
     flex-wrap:wrap;
+    gap:10px;
 }
 
 .box{
     background:#b08a5a;
-    color:white;
-    padding:15px;
+    padding:12px;
     border-radius:10px;
     min-width:80px;
 }
 
-/* Buttons */
+/* BUTTON */
 .btn{
     display:inline-block;
-    padding:12px 18px;
-    margin:10px;
+    padding:10px 18px;
+    margin-top:10px;
     border-radius:10px;
     background:#b08a5a;
     color:white;
     text-decoration:none;
 }
 
-/* RSVP */
 input, select{
     padding:10px;
     margin:5px;
     width:80%;
     max-width:300px;
     border-radius:8px;
-    border:1px solid #ccc;
+    border:none;
 }
-
 </style>
 </head>
 
 <body>
 
-<div class="hero">
-<div class="overlay">
-    <h2>Wedding Invitation</h2>
-    <h1>Amr ♥ Heba</h1>
-    <p>We are delighted to invite you</p>
-</div>
-</div>
+<div class="bg"></div>
+
+<!-- MUSIC -->
+<audio id="music" autoplay loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
 
 <div class="card">
 
-<!-- Info -->
-<h2>📅 1 / 1 / 2027</h2>
-<h2>🕘 9:00 PM</h2>
-<h2>📍 Armed Forces Hall - Benha</h2>
+<h2>Wedding Invitation</h2>
+<h1>Amr ♥ Heba</h1>
 
-<hr>
+<!-- IMAGE -->
+<img src="123.jpg" 
+style="width:140px;height:140px;border-radius:50%;
+border:3px solid #f5d7a1;object-fit:cover;margin-top:10px;">
 
-<!-- Countdown -->
-<h3>Countdown to Wedding</h3>
-<div class="countdown">
-<div class="box"><span id="days">0</span><br>Days</div>
-<div class="box"><span id="hours">0</span><br>Hours</div>
-<div class="box"><span id="minutes">0</span><br>Min</div>
-<div class="box"><span id="seconds">0</span><br>Sec</div>
+<div class="section">
+We are delighted to invite you to our wedding celebration
 </div>
 
-<hr>
+<div class="section">
+📅 1 / 1 / 2027 <br>
+🕘 9:00 PM <br>
+📍 Armed Forces Hall - Benha
+</div>
 
-<!-- Map -->
+<!-- COUNTDOWN -->
+<div class="section">
+<h3>Countdown</h3>
+<div class="countdown">
+<div class="box"><span id="d"></span><br>Days</div>
+<div class="box"><span id="h"></span><br>Hours</div>
+<div class="box"><span id="m"></span><br>Min</div>
+<div class="box"><span id="s"></span><br>Sec</div>
+</div>
+</div>
+
+<!-- MAP -->
 <a class="btn" target="_blank"
 href="https://www.google.com/maps/search/?api=1&query=Armed%20Forces%20Hall%20Benha">
 Open Map 📍
 </a>
 
-<!-- Music -->
-<br>
-<audio controls autoplay loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-</audio>
-
-<hr>
-
 <!-- RSVP -->
+<div class="section">
 <h3>RSVP</h3>
-
 <input id="name" placeholder="Your Name"><br>
 <select id="attend">
-<option value="Yes">Will Attend</option>
-<option value="No">Cannot Attend</option>
+<option>Will Attend</option>
+<option>Cannot Attend</option>
 </select><br>
-<input id="guests" placeholder="Number of Guests"><br>
 
 <button class="btn" onclick="rsvp()">Submit</button>
 <p id="msg"></p>
-
-<hr>
-
-<p>We look forward to celebrating with you 💛</p>
+</div>
 
 </div>
 
 <script>
 
-var weddingDate = new Date("Jan 1, 2027 21:00:00").getTime();
+// COUNTDOWN
+let wedding = new Date("Jan 1, 2027 21:00:00").getTime();
 
-setInterval(function(){
-    var now = new Date().getTime();
-    var distance = weddingDate - now;
+setInterval(()=>{
+    let now = new Date().getTime();
+    let diff = wedding - now;
 
-    document.getElementById("days").innerText = Math.floor(distance/(1000*60*60*24));
-    document.getElementById("hours").innerText = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-    document.getElementById("minutes").innerText = Math.floor((distance%(1000*60*60))/(1000*60));
-    document.getElementById("seconds").innerText = Math.floor((distance%(1000*60))/1000);
-
+    document.getElementById("d").innerText = Math.floor(diff/(1000*60*60*24));
+    document.getElementById("h").innerText = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    document.getElementById("m").innerText = Math.floor((diff%(1000*60*60))/(1000*60));
+    document.getElementById("s").innerText = Math.floor((diff%(1000*60))/1000);
 },1000);
 
+// RSVP
 function rsvp(){
-    var name = document.getElementById("name").value;
-    var attend = document.getElementById("attend").value;
-    var guests = document.getElementById("guests").value;
+    let name = document.getElementById("name").value;
+    let attend = document.getElementById("attend").value;
 
     if(name){
         document.getElementById("msg").innerHTML =
-        "Thank you " + name + " 💛 (" + attend + ", Guests: " + guests + ")";
+        "Thank you " + name + " 💛 (" + attend + ")";
     } else {
-        document.getElementById("msg").innerHTML =
-        "Please enter your name";
+        document.getElementById("msg").innerHTML = "Please enter your name";
     }
 }
+
+// MUSIC AUTOPLAY FIX
+window.addEventListener("load",()=>{
+    let audio = document.getElementById("music");
+    audio.play().catch(()=>{});
+});
 
 </script>
 
