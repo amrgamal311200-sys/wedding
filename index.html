@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amr & Heba Wedding Invitation</title>
+<title>Amr & Heba Wedding VIP</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
@@ -12,18 +12,71 @@ body{
     margin:0;
     font-family:'Playfair Display', serif;
     color:white;
-    text-align:center;
+    overflow-x:hidden;
 }
 
-/* BACKGROUND IMAGE */
+/* BACKGROUND */
 .bg{
     position:fixed;
     width:100%;
     height:100%;
     background:url('123.jpg') center/cover no-repeat;
-    filter:blur(6px) brightness(0.4);
+    filter:blur(6px) brightness(0.35);
     transform:scale(1.1);
+    z-index:-2;
+}
+
+/* OVERLAY PARTICLES */
+.particles{
+    position:fixed;
+    width:100%;
+    height:100%;
     z-index:-1;
+    pointer-events:none;
+}
+.particle{
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:white;
+    border-radius:50%;
+    animation:fall 10s linear infinite;
+    opacity:0.6;
+}
+@keyframes fall{
+    0%{transform:translateY(-10vh);}
+    100%{transform:translateY(110vh);}
+}
+
+/* ENTRY SCREEN */
+#entry{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:10;
+}
+
+#entry input{
+    padding:12px;
+    border-radius:8px;
+    border:none;
+    width:250px;
+    margin-top:10px;
+}
+
+#entry button{
+    margin-top:10px;
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    background:#b08a5a;
+    color:white;
+    cursor:pointer;
 }
 
 /* MAIN CARD */
@@ -33,43 +86,48 @@ body{
     background:rgba(0,0,0,0.6);
     padding:30px;
     border-radius:20px;
-    box-shadow:0 0 30px rgba(0,0,0,0.5);
+    text-align:center;
 }
 
 /* TITLE */
 h1{
     font-size:50px;
-    margin:10px 0;
     color:#f5d7a1;
 }
 
-h2{
-    font-weight:normal;
-}
-
-/* PROFILE IMAGE */
+/* PROFILE */
 .profile{
     width:150px;
     height:150px;
     border-radius:50%;
-    border:3px solid #f5d7a1;
     object-fit:cover;
-    margin-top:10px;
+    border:3px solid #f5d7a1;
 }
 
 /* COUNTDOWN */
 .countdown{
     display:flex;
     justify-content:center;
-    gap:10px;
     flex-wrap:wrap;
+    gap:10px;
 }
-
 .box{
     background:#b08a5a;
     padding:12px;
     border-radius:10px;
     min-width:80px;
+}
+
+/* SLIDER */
+.slider{
+    width:100%;
+    max-width:400px;
+    margin:20px auto;
+}
+.slider img{
+    width:100%;
+    border-radius:15px;
+    transition:1s;
 }
 
 /* INPUTS */
@@ -94,37 +152,62 @@ input, select{
     cursor:pointer;
     text-decoration:none;
 }
+
+/* MUSIC */
+.music-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#b08a5a;
+    padding:12px;
+    border-radius:50px;
+    cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
+<!-- ENTRY SCREEN -->
+<div id="entry">
+<h2>Welcome to Wedding Invitation</h2>
+<input id="guestName" placeholder="Enter Your Name">
+<button onclick="enter()">Enter</button>
+</div>
+
 <div class="bg"></div>
+
+<!-- PARTICLES -->
+<div class="particles" id="particles"></div>
 
 <!-- MUSIC -->
 <audio id="music" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
+<button class="music-btn" onclick="playMusic()">🎵</button>
+
 <div class="card">
 
-<h2>Wedding Invitation</h2>
+<h2 id="welcomeText">Wedding Invitation</h2>
 <h1>Amr ♥ Heba</h1>
 
 <img src="123.jpg" class="profile">
 
-<div class="section">
-We are delighted to invite you to our wedding celebration
-</div>
+<p>We are delighted to invite you to our wedding celebration</p>
 
-<div class="section">
-📅 1 / 1 / 2027 <br>
-🕘 9:00 PM <br>
-📍 Armed Forces Hall - Benha
+<p>📅 1 / 1 / 2027 | 🕘 9:00 PM | 📍 Benha</p>
+
+<hr>
+
+<!-- SLIDER -->
+<div class="slider">
+<img id="slide" src="123.jpg">
 </div>
 
 <hr>
 
+<!-- COUNTDOWN -->
 <h3>Countdown</h3>
 <div class="countdown">
 <div class="box"><span id="d"></span><br>Days</div>
@@ -157,42 +240,58 @@ Open Map 📍
 
 <script>
 
-// COUNTDOWN
+/* ENTRY */
+function enter(){
+    let name = document.getElementById("guestName").value;
+    document.getElementById("entry").style.display="none";
+    document.getElementById("welcomeText").innerText="Welcome " + name + " 💛";
+}
+
+/* PARTICLES */
+for(let i=0;i<30;i++){
+    let p = document.createElement("div");
+    p.className="particle";
+    p.style.left=Math.random()*100+"%";
+    p.style.animationDuration=(5+Math.random()*10)+"s";
+    document.getElementById("particles").appendChild(p);
+}
+
+/* COUNTDOWN */
 let wedding = new Date("Jan 1, 2027 21:00:00").getTime();
 
 setInterval(()=>{
     let now = new Date().getTime();
     let diff = wedding - now;
 
-    document.getElementById("d").innerText = Math.floor(diff/(1000*60*60*24));
-    document.getElementById("h").innerText = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-    document.getElementById("m").innerText = Math.floor((diff%(1000*60*60))/(1000*60));
-    document.getElementById("s").innerText = Math.floor((diff%(1000*60))/1000);
+    document.getElementById("d").innerText=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("h").innerText=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    document.getElementById("m").innerText=Math.floor((diff%(1000*60*60))/(1000*60));
+    document.getElementById("s").innerText=Math.floor((diff%(1000*60))/1000);
 },1000);
 
-// RSVP
+/* RSVP */
 function rsvp(){
-    let name = document.getElementById("name").value;
-    let attend = document.getElementById("attend").value;
+    let name=document.getElementById("name").value;
+    let attend=document.getElementById("attend").value;
 
     if(name){
-        document.getElementById("msg").innerHTML =
+        document.getElementById("msg").innerHTML=
         "Thank you " + name + " 💛 (" + attend + ")";
-    } else {
-        document.getElementById("msg").innerHTML = "Please enter your name";
     }
 }
 
-// MUSIC AUTO START (NO BUTTON)
-function startMusic(){
-    let audio = document.getElementById("music");
-    audio.play().catch(()=>{});
+/* MUSIC */
+function playMusic(){
+    document.getElementById("music").play();
 }
 
-window.addEventListener("load", startMusic);
-document.addEventListener("click", startMusic, {once:true});
-document.addEventListener("scroll", startMusic, {once:true});
-document.addEventListener("touchstart", startMusic, {once:true});
+/* SLIDER */
+let images=["123.jpg"];
+let i=0;
+setInterval(()=>{
+    i=(i+1)%images.length;
+    document.getElementById("slide").src=images[i];
+},3000);
 
 </script>
 
