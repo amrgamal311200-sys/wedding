@@ -21,31 +21,9 @@ body{
     width:100%;
     height:100%;
     background:url('123.jpg') center/cover no-repeat;
-    filter:blur(6px) brightness(0.35);
+    filter:blur(7px) brightness(0.35);
     transform:scale(1.1);
     z-index:-2;
-}
-
-/* OVERLAY PARTICLES */
-.particles{
-    position:fixed;
-    width:100%;
-    height:100%;
-    z-index:-1;
-    pointer-events:none;
-}
-.particle{
-    position:absolute;
-    width:8px;
-    height:8px;
-    background:white;
-    border-radius:50%;
-    animation:fall 10s linear infinite;
-    opacity:0.6;
-}
-@keyframes fall{
-    0%{transform:translateY(-10vh);}
-    100%{transform:translateY(110vh);}
 }
 
 /* ENTRY SCREEN */
@@ -53,7 +31,7 @@ body{
     position:fixed;
     width:100%;
     height:100%;
-    background:black;
+    background:linear-gradient(135deg, rgba(0,0,0,0.9), rgba(30,20,10,0.95));
     display:flex;
     justify-content:center;
     align-items:center;
@@ -61,19 +39,31 @@ body{
     z-index:10;
 }
 
+/* VIP NAME CARD */
+.vip-card{
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(10px);
+    padding:25px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.2);
+    box-shadow:0 0 25px rgba(255,215,150,0.3);
+    text-align:center;
+}
+
 #entry input{
     padding:12px;
-    border-radius:8px;
+    border-radius:10px;
     border:none;
-    width:250px;
+    width:260px;
     margin-top:10px;
+    text-align:center;
 }
 
 #entry button{
     margin-top:10px;
-    padding:10px 15px;
+    padding:10px 18px;
     border:none;
-    border-radius:8px;
+    border-radius:10px;
     background:#b08a5a;
     color:white;
     cursor:pointer;
@@ -87,6 +77,7 @@ body{
     padding:30px;
     border-radius:20px;
     text-align:center;
+    display:none;
 }
 
 /* TITLE */
@@ -95,7 +86,6 @@ h1{
     color:#f5d7a1;
 }
 
-/* PROFILE */
 .profile{
     width:150px;
     height:150px;
@@ -108,36 +98,14 @@ h1{
 .countdown{
     display:flex;
     justify-content:center;
-    flex-wrap:wrap;
     gap:10px;
+    flex-wrap:wrap;
 }
 .box{
     background:#b08a5a;
     padding:12px;
     border-radius:10px;
     min-width:80px;
-}
-
-/* SLIDER */
-.slider{
-    width:100%;
-    max-width:400px;
-    margin:20px auto;
-}
-.slider img{
-    width:100%;
-    border-radius:15px;
-    transition:1s;
-}
-
-/* INPUTS */
-input, select{
-    padding:10px;
-    margin:5px;
-    width:80%;
-    max-width:300px;
-    border-radius:8px;
-    border:none;
 }
 
 /* BUTTON */
@@ -152,42 +120,31 @@ input, select{
     cursor:pointer;
     text-decoration:none;
 }
-
-/* MUSIC */
-.music-btn{
-    position:fixed;
-    bottom:20px;
-    right:20px;
-    background:#b08a5a;
-    padding:12px;
-    border-radius:50px;
-    cursor:pointer;
-}
 </style>
 </head>
 
 <body>
 
-<!-- ENTRY SCREEN -->
-<div id="entry">
-<h2>Welcome to Wedding Invitation</h2>
-<input id="guestName" placeholder="Enter Your Name">
-<button onclick="enter()">Enter</button>
-</div>
-
 <div class="bg"></div>
-
-<!-- PARTICLES -->
-<div class="particles" id="particles"></div>
 
 <!-- MUSIC -->
 <audio id="music" loop>
   <source src="song.mp3" type="audio/mpeg">
 </audio>
 
-<button class="music-btn" onclick="playMusic()">🎵</button>
+<!-- ENTRY -->
+<div id="entry">
+    <div class="vip-card">
+        <h2>✨ Welcome to Our Wedding ✨</h2>
+        <p>Enter your name to continue</p>
+        <input id="guestName" placeholder="Your Name">
+        <br>
+        <button onclick="enter()">Enter</button>
+    </div>
+</div>
 
-<div class="card">
+<!-- MAIN -->
+<div class="card" id="main">
 
 <h2 id="welcomeText">Wedding Invitation</h2>
 <h1>Amr ♥ Heba</h1>
@@ -200,14 +157,6 @@ input, select{
 
 <hr>
 
-<!-- SLIDER -->
-<div class="slider">
-<img id="slide" src="123.jpg">
-</div>
-
-<hr>
-
-<!-- COUNTDOWN -->
 <h3>Countdown</h3>
 <div class="countdown">
 <div class="box"><span id="d"></span><br>Days</div>
@@ -240,20 +189,25 @@ Open Map 📍
 
 <script>
 
-/* ENTRY */
+/* ENTRY FUNCTION */
 function enter(){
     let name = document.getElementById("guestName").value;
-    document.getElementById("entry").style.display="none";
-    document.getElementById("welcomeText").innerText="Welcome " + name + " 💛";
-}
 
-/* PARTICLES */
-for(let i=0;i<30;i++){
-    let p = document.createElement("div");
-    p.className="particle";
-    p.style.left=Math.random()*100+"%";
-    p.style.animationDuration=(5+Math.random()*10)+"s";
-    document.getElementById("particles").appendChild(p);
+    if(!name){
+        alert("Please enter your name");
+        return;
+    }
+
+    // hide entry, show main
+    document.getElementById("entry").style.display="none";
+    document.getElementById("main").style.display="block";
+
+    // welcome name
+    document.getElementById("welcomeText").innerText = "Welcome " + name + " 💛";
+
+    // 🎵 PLAY MUSIC مباشرة بعد الاسم
+    let audio = document.getElementById("music");
+    audio.play().catch(()=>{});
 }
 
 /* COUNTDOWN */
@@ -275,23 +229,10 @@ function rsvp(){
     let attend=document.getElementById("attend").value;
 
     if(name){
-        document.getElementById("msg").innerHTML=
+        document.getElementById("msg").innerHTML =
         "Thank you " + name + " 💛 (" + attend + ")";
     }
 }
-
-/* MUSIC */
-function playMusic(){
-    document.getElementById("music").play();
-}
-
-/* SLIDER */
-let images=["123.jpg"];
-let i=0;
-setInterval(()=>{
-    i=(i+1)%images.length;
-    document.getElementById("slide").src=images[i];
-},3000);
 
 </script>
 
